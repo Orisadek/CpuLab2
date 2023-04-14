@@ -2,10 +2,10 @@ onerror {resume}
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /tb/rst
 add wave -noupdate /tb/clk
-add wave -noupdate -radix decimal /tb/upperBound
-add wave -noupdate -radix decimal /tb/countOut
+add wave -noupdate -radix hexadecimal /tb/upperBound
+add wave -noupdate -radix hexadecimal /tb/countOut
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {0 ps} 0}
+WaveRestoreCursors {{Cursor 1} {137045 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 41
@@ -21,5 +21,5 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {4341095 ps}
+WaveRestoreZoom {0 ps} {1105920 ps}
 bookmark add wave bookmark4 {{0 ps} {1 ns}} 0
