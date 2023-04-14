@@ -7,12 +7,16 @@ USE lab2.aux_package.all;
 ---------------------------------------------------------
 entity tb is
 	constant n : integer := 8;
+	constant max_range: integer :=7;
 end tb;
 ---------------------------------------------------------
 architecture rtb of tb is
+	type matrix is array (0 to max_range) of std_logic_vector(n-1 downto 0);
 	signal rst,clk : std_logic;
 	signal upperBound : std_logic_vector(n-1 downto 0);
 	signal countOut : std_logic_vector(n-1 downto 0);
+	SIGNAL upperBound_options : matrix := ("00000101","00000001","00000111","00001000","00000010","00001011","00001000",
+	"00000011");
 begin
 	L0 : top generic map (n) port map(rst,clk,upperBound,countOut);
     
@@ -24,20 +28,22 @@ begin
 		  clk <= not clk;
 		  wait for 50 ns;
         end process;
-				
-		gen_upperBound : process
-        begin
-		  upperBound <= (1=>'1',0=>'0',others => '0');
-		  for i in 0 to 6 loop
-			wait for 1200 ns;
-				upperBound <= upperBound+2;
-		  end loop;
-        end process;
-		  
+		
+		---upperBound <= (2 =>'1',1 =>'0',0 =>'1', others =>'0');
+		upperBound_rst : process
+		begin
+		for j in 0 to max_range loop
+			upperBound <= upperBound_options(j);
+			wait for 1000 ns;
+		  end loop; 
+        end process; 
+		
 		gen_rst : process
-        begin
-		  rst <='1','0' after 100 ns;
-		  wait;
+		begin
+		  rst <= '1';
+		  wait for 100 ns;
+		  rst <= not rst;
+		  wait for 2000 ns;
         end process; 
 		
 end architecture rtb;

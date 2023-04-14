@@ -15,7 +15,6 @@ architecture arc_sys of top is
 	signal cnt_slow :std_logic_vector(n-1 downto 0);
 	signal cnt_fast :std_logic_vector(n-1 downto 0);
 
-	
 begin
 	----------------------- fast counter process ------------------
 	proc1 : process(clk,rst)
@@ -25,7 +24,10 @@ begin
 	variable zeroes:std_logic_vector(n-1 downto 0);
 	begin
 	zeroes:=(others=>'0');
-	if( clk'EVENT and clk='1') then
+	if(rst='1') then
+		countOut <= zeroes;
+		cnt_fast<=(others=>'0');
+	elsif( clk'EVENT and clk='1') then
 		if(rst='0') then
 			if(cnt_slow = zeroes or res=cnt_slow) then
 				res:=(others => '0');
@@ -42,9 +44,9 @@ begin
 			end if;
 			cnt_fast<=res;
 			countOut<=res;
-		else 
-			countOut<= (others=>'0');
-			cnt_fast<=(others=>'0');
+		--else 
+		--	countOut <= zeroes;
+			--cnt_fast<=zeroes;
 		end if;
 	end if;
 	end process;
@@ -54,8 +56,9 @@ begin
 	variable input:std_logic_vector(n-1 downto 0);
 	variable carry:std_logic_vector(n-1 downto 0);
 	begin
-	
-	if(clk'EVENT  and clk='1') then
+	if(rst='1') then
+		cnt_slow<=(others=>'0');
+	elsif(clk'EVENT  and clk='1') then
 		if(rst='0') then
 			if( cnt_slow=cnt_fast and cnt_slow<upperBound) then 
 				input:=cnt_slow;
@@ -73,8 +76,6 @@ begin
 			else
 				cnt_slow<=(others=>'0');
 			end if;
-		else
-			cnt_slow<=(others=>'0');
 		end if;
 	end if;
 	end process;
