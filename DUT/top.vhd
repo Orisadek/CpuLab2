@@ -44,9 +44,6 @@ begin
 			end if;
 			cnt_fast<=res;
 			countOut<=res;
-		--else 
-		--	countOut <= zeroes;
-			--cnt_fast<=zeroes;
 		end if;
 	end if;
 	end process;
@@ -71,7 +68,7 @@ begin
 				end loop;
 				res(n-1):=input(n-1) xor carry(n-1);
 				cnt_slow<=res;
-			elsif(cnt_slow>cnt_fast and cnt_slow<=upperBound) then
+			elsif(cnt_slow>cnt_fast) then
 				null;
 			else
 				cnt_slow<=(others=>'0');
