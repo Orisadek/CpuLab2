@@ -14,6 +14,7 @@ end top;
 architecture arc_sys of top is
 	signal cnt_slow :std_logic_vector(n-1 downto 0);
 	signal cnt_fast :std_logic_vector(n-1 downto 0);
+
 	
 begin
 	----------------------- fast counter process ------------------
@@ -78,7 +79,6 @@ begin
 	end if;
 	end process;
 	--------------------------------------------------------------
-	
 end arc_sys;
 
 
