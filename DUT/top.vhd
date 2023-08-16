@@ -1,8 +1,8 @@
 LIBRARY ieee;
-library lab2;
+library work;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
-USE lab2.aux_package.all;
+USE work.aux_package.all;
 ------------------------------------------------------------------
 entity top is
 	generic ( n : positive := 8 ); 

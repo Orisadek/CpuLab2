@@ -2,5 +2,6 @@
  _lib.qdb
  _lib1_6.qdb
 _lib1_6.qpg
- _lib1_6.qtl
-   _vmake
+_lib1_6.qtl
+_vmake
+*.bak
